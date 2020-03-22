@@ -31,7 +31,7 @@ public class ChatServer {
     /**
      * Main method for the chat server.
      *
-     * @param args The command line arguements.
+     * @param args The command line arguments.
      */
     public static void main(String[] args) {
         try {
@@ -45,9 +45,9 @@ public class ChatServer {
     /**
      * Initializes the chat server.
      *
-     * @throws InterruptedException
+     * @throws InterruptedException An exception is thrown when there is an interruption.
      */
-    public void init(int port) throws InterruptedException {
+    private void init(int port) throws InterruptedException {
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
