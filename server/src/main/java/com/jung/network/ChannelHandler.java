@@ -1,8 +1,8 @@
 package com.jung.network;
 
 import com.google.common.flogger.FluentLogger;
-import com.jung.network.codec.decode.RequestData;
-import com.jung.network.codec.encode.ResponseData;
+import com.jung.network.codec.decode.ServerRequestData;
+import com.jung.network.codec.encode.ServerResponseData;
 import io.netty.channel.*;
 
 import java.util.logging.Level;
@@ -20,12 +20,12 @@ public final class ChannelHandler extends SimpleChannelInboundHandler<Object> {
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, Object message) {
-        RequestData requestData = (RequestData) message;
-        ResponseData responseData = new ResponseData();
-        responseData.setIntValue(requestData.getIntValue() * 2);
+        ServerRequestData serverRequestData = (ServerRequestData) message;
+        ServerResponseData responseData = new ServerResponseData();
+        responseData.setIntValue(serverRequestData.getIntValue() * 2);
         ChannelFuture future = ctx.writeAndFlush(responseData);
         future.addListener(ChannelFutureListener.CLOSE);
-        logger.at(Level.INFO).log("Request: %s", requestData.getStringValue());
+        logger.at(Level.INFO).log("Request: %s", serverRequestData.getStringValue());
     }
 
 }

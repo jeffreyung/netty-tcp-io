@@ -1,8 +1,8 @@
 package com.jung.network;
 
 import com.google.common.flogger.FluentLogger;
-import com.jung.network.codec.decode.RequestDecoder;
-import com.jung.network.codec.encode.ResponseDataEncoder;
+import com.jung.network.codec.decode.ServerRequestDecoder;
+import com.jung.network.codec.encode.ServerResponseDataEncoder;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
@@ -28,8 +28,8 @@ public class ServiceChannelInitializer extends ChannelInitializer<SocketChannel>
     protected void initChannel(SocketChannel ch) {
         ChannelPipeline pipeline = ch.pipeline();
         pipeline.addLast("timeout", new ReadTimeoutHandler(10));
-        pipeline.addLast("encoder", new ResponseDataEncoder());
-        pipeline.addLast("decoder", new RequestDecoder());
+        pipeline.addLast("encoder", new ServerResponseDataEncoder());
+        pipeline.addLast("decoder", new ServerRequestDecoder());
         pipeline.addLast("handler", handler);
         logger.at(Level.INFO).log("Connection received from %s", ch.remoteAddress().getAddress());
     }

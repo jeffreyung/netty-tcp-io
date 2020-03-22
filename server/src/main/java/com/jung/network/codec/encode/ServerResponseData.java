@@ -5,6 +5,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ResponseData {
+public class ServerResponseData {
     private int intValue;
 }

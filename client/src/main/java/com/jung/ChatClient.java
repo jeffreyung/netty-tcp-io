@@ -1,8 +1,8 @@
 package com.jung;
 
 import com.jung.network.ClientHandler;
-import com.jung.network.codec.decode.ResponseDataDecoder;
-import com.jung.network.codec.encode.RequestDataEncoder;
+import com.jung.network.codec.decode.ClientResponseDataDecoder;
+import com.jung.network.codec.encode.ClientRequestDataEncoder;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -29,8 +29,8 @@ public class ChatClient {
 
                 @Override
                 public void initChannel(SocketChannel ch) {
-                    ch.pipeline().addLast(new RequestDataEncoder(),
-                            new ResponseDataDecoder(), new ClientHandler());
+                    ch.pipeline().addLast(new ClientRequestDataEncoder(),
+                            new ClientResponseDataDecoder(), new ClientHandler());
                 }
             });
 
